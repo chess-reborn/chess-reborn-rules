@@ -1,0 +1,24 @@
+{
+  "name": "chess-reborn-rules",
+  "author": "therion666",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/therion-666/chess-reborn-rules"
+  },
+  "bugs": {
+    "url": "https://github.com/therion-666/chess-reborn-rules/issues"
+  },
+  "main": "index.ts",
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.7.4"
+  },
+  "scripts": {
+    "build": "tsc"
+  }
+}
