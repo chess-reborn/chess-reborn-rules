@@ -1,36 +1,30 @@
-import WhiteKing from "assets/WhiteKing.png"
-import BlackKing from "assets/BlackKing.png"
-
 import filterMoves from "utils/filterMoves"
-import findPieceAtPosition from "utils/findPieceAtPosition"
+import findPosition from "utils/findPosition"
 
-import pieceFactory from "pieces/pieceFactory"
+import Base from "pieces/Base"
 
 import Piece from "types/Piece"
 import Position from "types/Position"
 
-const teamToImageMap = {
-  white: WhiteKing,
-  black: BlackKing,
-}
+class King extends Base implements Piece {
+  private range = [-1, 0, -1]
 
-const range = [-1, 0, -1]
-
-const getPossibleMoves = (currentPiece: Piece, pieces: Piece[]) => {
-  const moves = [] as Position[]
-  range.forEach(i => {
-    range.forEach(j => {
-      const move = {
-        x: currentPiece.x + i,
-        y: currentPiece.y + j,
-      }
-      const piece = findPieceAtPosition(pieces, move)
-      if (!piece || currentPiece.team !== piece.team) {
-        moves.push(move)
-      }
+  public getPossibleMoves = (pieces: Piece[]) => {
+    const moves = [] as Position[]
+    this.range.forEach(i => {
+      this.range.forEach(j => {
+        const move = {
+          x: this.x + i,
+          y: this.y + j,
+        }
+        const piece = findPosition(pieces, move)
+        if (!piece || this.team !== piece.team) {
+          moves.push(move)
+        }
+      })
     })
-  })
-  return filterMoves(moves)
+    return filterMoves(moves)
+  }
 }
 
-export default pieceFactory(teamToImageMap, getPossibleMoves)
+export default King

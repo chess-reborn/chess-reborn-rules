@@ -3,7 +3,7 @@ import Position from "types/Position"
 
 import range from "utils/range"
 import filterMoves from "utils/filterMoves"
-import findPieceAtPosition from "utils/findPieceAtPosition"
+import findPosition from "utils/findPosition"
 
 const findDirectionalMoves = (currentPiece: Piece, pieces: Piece[], direction: Position) => {
   const moves = [] as Position[]
@@ -13,7 +13,7 @@ const findDirectionalMoves = (currentPiece: Piece, pieces: Piece[], direction: P
       x: currentPiece.x + direction.x * step,
       y: currentPiece.y + direction.y * step,
     }
-    const foundPiece = findPieceAtPosition(pieces, move)
+    const foundPiece = findPosition(pieces, move)
 
     if (foundPiece) {
       if (foundPiece.team !== currentPiece.team) {
@@ -25,6 +25,8 @@ const findDirectionalMoves = (currentPiece: Piece, pieces: Piece[], direction: P
     if (!foundPiece) {
       moves.push(move)
     }
+    
+    return false
   })
 
   return filterMoves(moves)

@@ -6,16 +6,19 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/therion-666/chess-reborn-rules"
+    "url": "git+https://github.com/chess-reborn/chess-reborn-rules"
   },
   "bugs": {
-    "url": "https://github.com/therion-666/chess-reborn-rules/issues"
+    "url": "https://github.com/chess-reborn/chess-reborn-rules/issues"
   },
   "main": "index.ts",
   "engines": {
     "node": ">=4.0.0"
   },
   "devDependencies": {
+    "jest": "^28.1.3",
+    "ts-jest": "^28.0.7",
+    "@types/jest": "^28.1.6",
     "typescript": "^4.7.4"
   },
   "scripts": {

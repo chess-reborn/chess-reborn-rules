@@ -1,30 +1,24 @@
-import WhiteBishop from "assets/WhiteBishop.png"
-import BlackBishop from "assets/BlackBishop.png"
-
 import findDirectionalMoves from "utils/findDirectionalMoves"
 
-import pieceFactory from "pieces/pieceFactory"
+import Base from "pieces/Base"
 
 import Piece from "types/Piece"
 import Position from "types/Position"
 
-const teamToImageMap = {
-  white: WhiteBishop,
-  black: BlackBishop,
+class Bishop extends Base implements Piece {
+  private moves = [
+    { x: -1, y: -1 },
+    { x: -1, y: 1 },
+    { x: 1, y: -1 },
+    { x: 1, y: 1 },
+  ]
+
+  public getPossibleMoves = (pieces: Piece[]): Position[] => this.moves.reduce(
+    (result, move) => ([
+      ...result,
+      ...findDirectionalMoves(this, pieces, move)
+    ]), [] as Position[],
+  )
 }
 
-const moves = [
-  { x: -1, y: -1 },
-  { x: -1, y: 1 },
-  { x: 1, y: -1 },
-  { x: 1, y: 1 },
-]
-
-const getPossibleMoves = (currentPiece: Piece, pieces: Piece[]) => moves.reduce(
-  (result, move) => ([
-    ...result,
-    ...findDirectionalMoves(currentPiece, pieces, move)
-  ]), [] as Position[],
-)
-
-export default pieceFactory(teamToImageMap, getPossibleMoves)
+export default Bishop

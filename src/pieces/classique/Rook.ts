@@ -1,30 +1,24 @@
-import WhiteRook from "assets/WhiteRook.png"
-import BlackRook from "assets/BlackRook.png"
-
 import findDirectionalMoves from "utils/findDirectionalMoves"
 
-import pieceFactory from "pieces/pieceFactory"
+import Base from "pieces/Base"
 
 import Piece from "types/Piece"
 import Position from "types/Position"
 
-const teamToImageMap = {
-  white: WhiteRook,
-  black: BlackRook,
+class Rook extends Base implements Piece {
+  private moves = [
+    { x: -1, y: 0 },
+    { x: 0, y: -1 },
+    { x: 0, y: 1 },
+    { x: 1, y: 0 },
+  ]
+
+  public getPossibleMoves = (pieces: Piece[]): Position[] => this.moves.reduce(
+    (result, move) => ([
+      ...result,
+      ...findDirectionalMoves(this, pieces, move)
+    ]), [] as Position[],
+  )
 }
 
-const moves = [
-  { x: -1, y: 0 },
-  { x: 0, y: -1 },
-  { x: 0, y: 1 },
-  { x: 1, y: 0 },
-]
-
-const getPossibleMoves = (currentPiece: Piece, pieces: Piece[]): Position[] => moves.reduce(
-  (result, move) => ([
-    ...result,
-    ...findDirectionalMoves(currentPiece, pieces, move)
-  ]), [] as Position[],
-)
-
-export default pieceFactory(teamToImageMap, getPossibleMoves)
+export default Rook

@@ -1,43 +1,37 @@
-import WhiteKnight from "assets/WhiteKnight.png"
-import BlackKnight from "assets/BlackKnight.png"
-
 import filterMoves from "utils/filterMoves"
-import findPieceAtPosition from "utils/findPieceAtPosition"
+import findPosition from "utils/findPosition"
 
-import pieceFactory from "pieces/pieceFactory"
+import Base from "pieces/Base"
 
 import Piece from "types/Piece"
 import Position from "types/Position"
 
-const teamToImageMap = {
-  white: WhiteKnight,
-  black: BlackKnight,
+class Knight extends Base implements Piece {
+  private moves = [
+    { x: -2, y: -1 },
+    { x: -2, y: 1 },
+    { x: -1, y: -2 },
+    { x: -1, y: 2 },
+    { x: 1, y: -2 },
+    { x: 1, y: 2 },
+    { x: 2, y: 1 },
+    { x: 2, y: -1 },
+  ]
+
+  private getKnightMove = (pieces: Piece[], offset: Position) => {
+    const move = {
+      x: this.x + offset.x,
+      y: this.y + offset.y,
+    }
+    const piece = findPosition(pieces, move)
+    if (piece) {
+      return piece.team !== this.team && move
+    }
+  }
+
+  public getPossibleMoves = (pieces: Piece[]) => filterMoves(
+    this.moves.map(move => this.getKnightMove(pieces, move))
+  )
 }
 
-const moves = [
-  { x: -2, y: -1 },
-  { x: -2, y: 1 },
-  { x: -1, y: -2 },
-  { x: -1, y: 2 },
-  { x: 1, y: -2 },
-  { x: 1, y: 2 },
-  { x: 2, y: 1 },
-  { x: 2, y: -1 },
-]
-
-const getKnightMove = (currentPiece: Piece, pieces: Piece[], offset: Position) => {
-  const move = {
-    x: currentPiece.x + offset.x,
-    y: currentPiece.y + offset.y,
-  }
-  const piece = findPieceAtPosition(pieces, move)
-  if (piece) {
-    return piece.team !== currentPiece.team && move
-  }
-}
-
-const getPossibleMoves = (currentPiece: Piece, pieces: Piece[]) => filterMoves(
-  moves.map(move => getKnightMove(currentPiece, pieces, move))
-)
-
-export default pieceFactory(teamToImageMap, getPossibleMoves)
+export default Knight
