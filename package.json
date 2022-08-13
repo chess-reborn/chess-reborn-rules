@@ -11,7 +11,7 @@
   "bugs": {
     "url": "https://github.com/chess-reborn/chess-reborn-rules/issues"
   },
-  "main": "index.ts",
+  "main": "./src/index.ts",
   "engines": {
     "node": ">=4.0.0"
   },
