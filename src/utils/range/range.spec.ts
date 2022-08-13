@@ -5,5 +5,5 @@ test("check if 0 length range returns empty array", () => {
 })
 
 test("check if range returns correct array", () => {
-  expect(range(8)).toMatchObject([1, 2, 3, 4, 5, 6, 7, 8])
+  expect(range(8)).toMatchObject([0, 1, 2, 3, 4, 5, 6, 7])
 })

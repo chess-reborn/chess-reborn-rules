@@ -8,7 +8,9 @@ import findPosition from "utils/findPosition"
 const findDirectionalMoves = (currentPiece: Piece, pieces: Piece[], direction: Position) => {
   const moves = [] as Position[]
 
-  range(8).some((step) => {
+  for (const i of range(8)) {
+    const step = i + 1
+    
     const move = {
       x: currentPiece.x + direction.x * step,
       y: currentPiece.y + direction.y * step,
@@ -19,15 +21,13 @@ const findDirectionalMoves = (currentPiece: Piece, pieces: Piece[], direction: P
       if (foundPiece.team !== currentPiece.team) {
         moves.push(move)
       }
-      return true
+      break
     }
     
     if (!foundPiece) {
       moves.push(move)
     }
-    
-    return false
-  })
+  }
 
   return filterMoves(moves)
 }
