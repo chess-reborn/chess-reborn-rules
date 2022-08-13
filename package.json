@@ -3,7 +3,7 @@
   "author": "therion666",
   "version": "1.0.0",
   "license": "MIT",
-  "private": true,
+  "private": false,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/chess-reborn/chess-reborn-rules"
